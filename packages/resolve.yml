@@ -1,0 +1,7 @@
+
+
+metadata:
+  name: Davinci Resolve
+  description: Professional video editing software
+  pkg_version: 1.0
+  type: distrobox

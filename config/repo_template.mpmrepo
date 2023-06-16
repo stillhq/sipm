@@ -1,0 +1,13 @@
+[repo_id1]
+url: String,
+mirrorlist: String,
+gpg: String,
+gpg_check: bool,
+enabled: bool
+
+[repo_id2]
+url: String,
+mirrorlist: String,
+gpg: String,
+gpg_check: bool,
+enabled: bool
