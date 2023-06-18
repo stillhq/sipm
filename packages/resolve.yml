@@ -1,7 +1,25 @@
-
-
 metadata:
   name: Davinci Resolve
   description: Professional video editing software
   pkg_version: 1.0
+  license: Proprietary
+  URL: https://www.blackmagicdesign.com/products/davinciresolve/
+  categories: [VideoAudio] # Free Desktop Categories
   type: distrobox
+  arch: x86_64
+
+
+distrobox:
+  container_name: davinci_resolve
+  image: quay.io/toolbx-images/almalinux-toolbox:9
+  files: # Will be provided as bash arguments, ex $1
+    - Resolve Run File:
+        attempt_auto_download: false
+        file_glob: DaVinci_Resolve_*_Linux.run
+        url: https://www.blackmagicdesign.com/products/davinciresolve/
+  install:
+    chmod +x DaVinci_Resolve_*_Linux.run
+    $(./$1)
+  upgrade:
+    chmod +x DaVinci_Resolve_*_Linux.run
+    $(./$1)

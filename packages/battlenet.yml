@@ -1,0 +1,24 @@
+metadata:
+  name: Davinci Resolve
+  description: Professional video editing software
+  pkg_version: 1.0
+  license: Proprietary
+  URL: https://www.blackmagicdesign.com/products/davinciresolve/
+  categories: [ VideoAudio ] # Free Desktop Categories
+  type: distrobox
+  arch: x86_64
+
+
+wine:
+  winedb_id: 15365
+  files: # Will be provided as bash arguments, ex $1
+    - Battlenet Installer:
+        attempt_auto_download: true
+        file_glob: Battle.net-Setup.exe
+        url: https://us.battle.net/download/getInstaller?os=win&installer=Battle.net-Setup.exe
+#  install:
+#    chmod +x DaVinci_Resolve_*_Linux.run
+#    $(./$1)
+#  upgrade:
+#    chmod +x DaVinci_Resolve_*_Linux.run
+#    $(./$1)
