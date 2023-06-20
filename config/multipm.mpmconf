@@ -1,0 +1,8 @@
+[multipm]
+sources=all
+ignore_gpg=false
+ignore_mirrors=false
+#repo_directory=/etc/multipm/repos     Will be default, but currently commented out for testing
+repo_directory=/home/cameron/CLionProjects/multipm/config/repos
+root_directory=/var/cache/multipm
+user_directory=/home/cameron/.multipm

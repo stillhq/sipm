@@ -52,7 +52,7 @@ repositories: Vec<Repo>,
 local_install: bool,
 ignore_gpg: bool,
 ignore_mirrors: bool,
-default_local_install: bool,
+~~default_local_install: bool,~~ Use root to determine this instead
 container_directory: String,
 cache_directory: String
 

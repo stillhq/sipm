@@ -4,12 +4,65 @@ use configparser::ini::Ini;
 pub struct Config {
     enabled_sources: Vec<String>,
     repositories: Vec<Repo>,
-    local_install: bool,
     ignore_gpg: bool,
     ignore_mirrors: bool,
-    default_local_install: bool,
-    container_directory: String,
-    cache_directory: String
+    repo_directory: String,
+    root_directory: String,
+    user_directory: String,
+}
+
+impl Config {
+    fn add_repos(&mut self) {
+        self.repositories = get_repos(&self.repo_directory);
+    }
+}
+
+impl fmt::Display for Config {
+    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
+        write!(
+            f, // "Enabled Sources: {:?}\nRepositories: {:?}\n\
+            "Ignore GPG: {}\nIgnore Mirrors: {}\n\
+            Root Directory: {}\nUser Directory: {}\nRepo Directory {}",
+            // self.enabled_sources, self.repositories,
+            self.ignore_gpg, self.ignore_mirrors,
+            self.root_directory, self.user_directory,
+            self.repo_directory
+        )
+    }
+}
+
+pub(crate) fn get_conf_from_file(file: &str) -> Config {
+    let mut conf_ini = Ini::new();
+    let conf_map = conf_ini.load(file).unwrap();
+    let settings = conf_map.get("multipm").unwrap();
+
+    // TODO: Implement sources
+    let mut sources = Vec::new();
+    // TODO: Local install != is root
+    let mut local_install = false;
+
+
+    let ignore_mirrors = conf_ini.getbool("multipm", "ignore_mirrors")
+        .unwrap_or(Option::from(false)).unwrap();
+    let ignore_gpg = conf_ini.getbool("multipm", "ignore_gpg")
+        .unwrap_or(Option::from(false)).unwrap();
+
+
+    let root_directory = settings.get("root_directory").expect(
+        "Missing root_directory key in config file").clone().unwrap();
+    let user_directory = settings.get("user_directory").expect(
+        "Missing user_directory key in config file").clone().unwrap();
+    let repo_directory = settings.get("repo_directory").expect(
+        "Missing repo_directory key in config file").clone().unwrap();
+    let repo_list = get_repos(repo_directory.as_str());
+
+    return Config {
+        enabled_sources: sources,
+        repositories: repo_list,
+        ignore_gpg, ignore_mirrors,
+        repo_directory, root_directory,
+        user_directory
+    }
 }
 
 pub struct Repo {
@@ -37,10 +90,11 @@ pub fn get_repos(directory: &str) -> Vec<Repo> {
     // Parse the config file
     // Return a vector of Repo structs
     let mut repos: Vec<Repo> = Vec::new();
-    for file in fs::read_dir(&directory.to_string()).expect(&format!("{} {}", &directory, "doesn't exist").to_string()) {
-        let filename = file.unwrap().path().display().to_string().as_str();
+    for file in fs::read_dir(&directory.to_string()).expect(
+                &format!("repo directory {} doesn't exist", &directory).to_string()) {
+        let filename = file.unwrap().path().display().to_string();
         if filename.ends_with(".mpmrepo") {
-            for repo in get_repos_from_file(filename) {
+            for repo in get_repos_from_file(filename.as_str()) {
                 repos.push(repo);
             }
         }
