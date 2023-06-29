@@ -6,15 +6,10 @@ pub struct Config {
     repositories: Vec<Repo>,
     ignore_gpg: bool,
     ignore_mirrors: bool,
+    local_install: bool,
     repo_directory: String,
     root_directory: String,
     user_directory: String,
-}
-
-impl Config {
-    fn add_repos(&mut self) {
-        self.repositories = get_repos(&self.repo_directory);
-    }
 }
 
 impl fmt::Display for Config {
@@ -60,8 +55,8 @@ pub(crate) fn get_conf_from_file(file: &str) -> Config {
         enabled_sources: sources,
         repositories: repo_list,
         ignore_gpg, ignore_mirrors,
-        repo_directory, root_directory,
-        user_directory
+        local_install, repo_directory,
+        root_directory, user_directory
     }
 }
 
@@ -108,7 +103,7 @@ pub fn get_repos_from_file(file: &str) -> Vec<Repo> {
     let repo_map = repo_ini.load(file).unwrap();
     for (repo, props) in repo_map.iter() {
         let mut gpg = String::from("");
-        let mut gpg_check = false;
+        let gpg_check = false;
         if let Some(gpg_check) = repo_ini.getbool(&repo, "gpgcheck").unwrap_or(Option::None) {
             if gpg_check {
                 gpg = props.get("gpg").expect(
