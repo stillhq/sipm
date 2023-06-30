@@ -1,8 +1,9 @@
 [multipm]
-sources=all
+sources=[flatpak, snap, distrobox, wine, nativeifer, appimage, rpm-ostree]   # Ordered
 ignore_gpg=false
 ignore_mirrors=false
 #repo_directory=/etc/multipm/repos     Will be default, but currently commented out for testing
 repo_directory=/home/cameron/CLionProjects/multipm/config/repos
-root_directory=/var/cache/multipm
+cache_directory=/var/cache/multipm
+package_directory=/var/lib/multipm
 user_directory=/home/cameron/.multipm

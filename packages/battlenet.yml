@@ -1,18 +1,19 @@
 metadata:
-  name: Davinci Resolve
-  description: Professional video editing software
+  name: Battlenet
+  description: Game launcher for Blizzard games. Linux Game compatibility may vary.
+  author: Battlenet
+  package_author: PizzaLovingNerd
   pkg_version: 1.0
   license: Proprietary
-  URL: https://www.blackmagicdesign.com/products/davinciresolve/
-  categories: [ VideoAudio ] # Free Desktop Categories
-  type: distrobox
+  URL: https://us.shop.battle.net/en-us?from=root
+  categories: [Game] # Free Desktop Categories
+  type: wine
   arch: x86_64
-
 
 wine:
   winedb_id: 15365
   files: # Will be provided as bash arguments, ex $1
-    - Battlenet Installer:
+    - installer:
         attempt_auto_download: true
         file_glob: Battle.net-Setup.exe
         url: https://us.battle.net/download/getInstaller?os=win&installer=Battle.net-Setup.exe

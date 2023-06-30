@@ -45,8 +45,10 @@
   - Implementation difficult: Easy
   - Likely the easiest to implement, just make it run ostree commands
 
+- bash auto complete
 
 Conf options:
+```ini
 enabled_sources: Vec<String>,
 repositories: Vec<Repo>,
 local_install: bool,
@@ -55,10 +57,12 @@ ignore_mirrors: bool,
 ~~default_local_install: bool,~~ Use root to determine this instead
 container_directory: String,
 cache_directory: String
-
+```
 Repo Options:
+```ini
 url: String,
 mirrorlist: String,
 gpg: String,
 gpg_check: bool,
 enabled: bool
+```

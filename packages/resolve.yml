@@ -1,13 +1,14 @@
 metadata:
   name: Davinci Resolve
   description: Professional video editing software
+  author: Blackmagic
+  package_author: PizzaLovingNerd
   pkg_version: 1.0
   license: Proprietary
   URL: https://www.blackmagicdesign.com/products/davinciresolve/
-  categories: [VideoAudio] # Free Desktop Categories
+  categories: [VideoAudio, Video]  # Free Desktop Categories
   type: distrobox
-  arch: x86_64
-
+  arch: [x86_64]
 
 distrobox:
   container_name: davinci_resolve
