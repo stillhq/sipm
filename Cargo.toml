@@ -8,3 +8,4 @@ edition = "2021"
 [dependencies]
 glob = "0.3.1"
 configparser = "3.0.2"
+yaml-rust = "0.4.5"

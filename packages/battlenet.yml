@@ -3,9 +3,9 @@ metadata:
   description: Game launcher for Blizzard games. Linux Game compatibility may vary.
   author: Battlenet
   package_author: PizzaLovingNerd
-  pkg_version: 1.0
+  package_version: 1.0
   license: Proprietary
-  URL: https://us.shop.battle.net/en-us?from=root
+  url: "https://us.shop.battle.net/en-us?from=root"
   categories: [Game] # Free Desktop Categories
   type: wine
   arch: x86_64

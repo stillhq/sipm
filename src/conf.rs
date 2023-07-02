@@ -51,6 +51,7 @@ pub(crate) fn get_conf_from_file(file: &str) -> Config {
         "Missing repo_directory key in config file").clone().unwrap();
     let repo_list = get_repos(repo_directory.as_str());
 
+
     return Config {
         enabled_sources: sources,
         repositories: repo_list,
