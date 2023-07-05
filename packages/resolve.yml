@@ -6,6 +6,7 @@ metadata:
   package_version: 1.0
   license: Proprietary
   url: https://www.blackmagicdesign.com/products/davinciresolve/
+  can_auto_update: false
   categories: [VideoAudio, Video]  # Free Desktop Categories
   type: distrobox
   arch: [x86_64]

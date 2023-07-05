@@ -1,6 +1,7 @@
 pub mod conf;
 pub mod sourceman {
-    pub mod base; pub use base as srcman_base;
+    pub mod base;
+    pub mod sources;
 }
 
 fn main() {
@@ -10,5 +11,5 @@ fn main() {
         println!("{}", repo);
     }
 
-    println!("{:?}", sourceman::base::get_source_and_metadata("/home/cameron/CLionProjects/multipm/packages/battlenet.yml"));
+    println!("{:?}", sourceman::base::get_metadata_and_source("/home/cameron/CLionProjects/multipm/packages/battlenet.yml"));
 }

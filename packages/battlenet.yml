@@ -7,6 +7,7 @@ metadata:
   license: Proprietary
   url: "https://us.shop.battle.net/en-us?from=root"
   categories: [Game] # Free Desktop Categories
+  can_auto_update: true
   type: wine
   arch: x86_64
 
