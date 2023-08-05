@@ -1,8 +1,6 @@
-use std::fmt::Debug;
 use crate::conf::Config as Config;
 use std::{fmt, fs};
 use std::any::Any;
-use std::hash::Hash;
 use std::io::Read;
 use crate::sourceman::sources as Sources;
 use yaml_rust::Yaml;
@@ -97,3 +95,8 @@ pub trait Source {
     fn interactive_recipe_generator(&self) -> (i32, dyn Any);
     fn sync_repo_cache(&self, _: Config) -> i32 { return 0 }
 }
+
+pub struct DependentFile {
+    file_glob: String,
+    url: String,
+    }
