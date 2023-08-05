@@ -33,7 +33,7 @@ pub fn get_metadata_and_source(file_path: &str) -> (RecipeMetadata, Yaml) {
     };
 
     let source_data = &recipe[0][recipe_metadata.source_type.as_str()];
-    return (recipe_metadata, source_data.clone());
+    (recipe_metadata, source_data.clone())
 }
 
 pub struct Recipe {
@@ -92,7 +92,7 @@ pub trait Source {
     const SUPPORTED_LOCAL_FILE_TYPES: Vec<String> = vec![];
 
     fn initialize(&self, _: Config) -> i32 {
-        return 0;
+        0
     }
     fn install(&self, _: Recipe, _: Config) -> i32;
     fn install_local_file(&self, _: Recipe, _: Config) -> i32;
@@ -105,7 +105,7 @@ pub trait Source {
     fn generate_recipe(&self, metadata: RecipeMetadata, source_data: dyn Any) -> (i32, Recipe);
     fn interactive_recipe_generator(&self) -> (i32, dyn Any);
     fn sync_repo_cache(&self, _: Config) -> i32 {
-        return 0;
+        0
     }
 }
 
@@ -113,4 +113,3 @@ pub struct DependentFile {
     file_glob: String,
     url: String,
 }
-

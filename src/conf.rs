@@ -34,9 +34,9 @@ pub(crate) fn get_conf_from_file(file: &str) -> Config {
     let settings = conf_map.get("multipm").unwrap();
 
     // TODO: Implement sources
-    let mut sources = Vec::new();
+    let sources = Vec::new();
     // TODO: Local install != is root
-    let mut local_install = false;
+    let local_install = false;
 
     let ignore_mirrors = conf_ini
         .getbool("multipm", "ignore_mirrors")
@@ -64,7 +64,7 @@ pub(crate) fn get_conf_from_file(file: &str) -> Config {
         .unwrap();
     let repo_list = get_repos(repo_directory.as_str());
 
-    return Config {
+    Config {
         enabled_sources: sources,
         repositories: repo_list,
         ignore_gpg,
@@ -73,7 +73,7 @@ pub(crate) fn get_conf_from_file(file: &str) -> Config {
         repo_directory,
         root_directory,
         user_directory,
-    };
+    }
 }
 
 pub struct Repo {
@@ -101,7 +101,7 @@ pub fn get_repos(directory: &str) -> Vec<Repo> {
     // Parse the config file
     // Return a vector of Repo structs
     let mut repos: Vec<Repo> = Vec::new();
-    for file in fs::read_dir(&directory.to_string())
+    for file in fs::read_dir(directory)
         .expect(&format!("repo directory {} doesn't exist", &directory).to_string())
     {
         let filename = file.unwrap().path().display().to_string();
@@ -111,7 +111,7 @@ pub fn get_repos(directory: &str) -> Vec<Repo> {
             }
         }
     }
-    return repos;
+    repos
 }
 
 pub fn get_repos_from_file(file: &str) -> Vec<Repo> {
@@ -121,7 +121,7 @@ pub fn get_repos_from_file(file: &str) -> Vec<Repo> {
     for (repo, props) in repo_map.iter() {
         let mut gpg = String::from("");
         let gpg_check = false;
-        if let Some(gpg_check) = repo_ini.getbool(&repo, "gpgcheck").unwrap_or(Option::None) {
+        if let Some(gpg_check) = repo_ini.getbool(repo, "gpgcheck").unwrap_or(Option::None) {
             if gpg_check {
                 gpg = props
                     .get("gpg")
@@ -145,11 +145,10 @@ pub fn get_repos_from_file(file: &str) -> Vec<Repo> {
             gpg,
             gpg_check,
             enabled: repo_ini
-                .getbool(&repo, "enabled")
+                .getbool(repo, "enabled")
                 .unwrap_or(Option::None)
                 .unwrap_or(true),
         });
     }
-    return repo_list;
+    repo_list
 }
-
