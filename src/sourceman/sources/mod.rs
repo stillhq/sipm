@@ -13,9 +13,9 @@ pub const SOURCE_LIST: [String; 5] = [
 ];
 
 pub enum SourceType {
-    Flatpak(flatpak::FlatpakSource),
-    Snap(snap::SnapSource),
-    Wine(wine::WineSource),
-    Nativeifer(nativeifer::NaviveierSource),
+    // Flatpak(flatpak::FlatpakSource),
+    // Snap(snap::SnapSource),
+    // Wine(wine::WineSource),
+    // Nativeifer(nativeifer::NaviveierSource),
     Distrobox(distrobox::DistroboxSource)
 }
