@@ -1,6 +1,7 @@
 use configparser::ini::Ini;
-use std::{fmt, fs};
+use std::fs;
 
+#[derive(Debug, Clone)]
 pub struct Config {
     enabled_sources: Vec<String>,
     repositories: Vec<Repo>,
@@ -10,22 +11,6 @@ pub struct Config {
     repo_directory: String,
     root_directory: String,
     user_directory: String,
-}
-
-impl fmt::Display for Config {
-    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
-        write!(
-            f, // "Enabled Sources: {:?}\nRepositories: {:?}\n\
-            "Ignore GPG: {}\nIgnore Mirrors: {}\n\
-            Root Directory: {}\nUser Directory: {}\nRepo Directory {}",
-            // self.enabled_sources, self.repositories,
-            self.ignore_gpg,
-            self.ignore_mirrors,
-            self.root_directory,
-            self.user_directory,
-            self.repo_directory
-        )
-    }
 }
 
 pub(crate) fn get_conf_from_file(file: &str) -> Config {
@@ -76,6 +61,7 @@ pub(crate) fn get_conf_from_file(file: &str) -> Config {
     }
 }
 
+#[derive(Debug, Clone)]
 pub struct Repo {
     pub repo_id: String,
     pub url: String,
@@ -83,17 +69,6 @@ pub struct Repo {
     pub gpg: String,
     pub gpg_check: bool,
     pub enabled: bool,
-}
-
-impl fmt::Display for Repo {
-    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
-        write!(
-            f,
-            "Repo ID: {}\nURL: {}\nMirrorlist: {}\n\
-            GPG: {}\nGPG Check: {}\nEnabled: {}\n",
-            self.repo_id, self.url, self.mirrorlist, self.gpg, self.gpg_check, self.enabled
-        )
-    }
 }
 
 pub fn get_repos(directory: &str) -> Vec<Repo> {

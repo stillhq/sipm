@@ -1,6 +1,4 @@
-use super::base::{Config, Recipe, Source};
-use std::fmt;
-
+#[derive(Debug)]
 pub struct RecipeMetadata {
     name: String,
     description: String,
@@ -13,27 +11,6 @@ pub struct RecipeMetadata {
     source_type: String,
     can_auto_update: bool,
     arch: String,
-}
-impl fmt::Debug for RecipeMetadata {
-    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
-        write!(
-            f,
-            "Name: {}\nDescription: {}\nAuthor: {}\n\
-            Package Author: {}\nPackage Version: {}\nLicense: {}\n\
-            URL: {}\nCategories: {:?}\nSource Type: {}\nArch: {}\nCan Auto Update: {}\n",
-            self.name,
-            self.description,
-            self.author,
-            self.package_author,
-            self.package_version,
-            self.license,
-            self.url,
-            self.categories,
-            self.source_type,
-            self.arch,
-            self.can_auto_update
-        )
-    }
 }
 
 pub struct ContainerRecipe {

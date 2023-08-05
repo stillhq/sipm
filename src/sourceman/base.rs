@@ -1,5 +1,5 @@
 use super::sources;
-use std::{any::Any, fmt, fs, io::Read};
+use std::{any::Any, fs, io::Read};
 use yaml_rust::Yaml;
 use yaml_rust::YamlLoader;
 
@@ -36,6 +36,7 @@ pub fn get_metadata_and_source(file_path: &str) -> (RecipeMetadata, Yaml) {
     (recipe_metadata, source_data.clone())
 }
 
+#[derive(Debug)]
 pub struct Recipe {
     metadata: RecipeMetadata,
     source_data: Box<dyn Any>,
@@ -50,6 +51,7 @@ pub trait RecipeFunctions {
     fn parse_yaml(&self, file: &str) -> Recipe;
 }
 
+#[derive(Debug)]
 pub struct RecipeMetadata {
     name: String,
     description: String,
@@ -62,27 +64,6 @@ pub struct RecipeMetadata {
     source_type: String,
     can_auto_update: bool,
     arch: String,
-}
-impl fmt::Debug for RecipeMetadata {
-    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
-        write!(
-            f,
-            "Name: {}\nDescription: {}\nAuthor: {}\n\
-            Package Author: {}\nPackage Version: {}\nLicense: {}\n\
-            URL: {}\nCategories: {:?}\nSource Type: {}\nArch: {}\nCan Auto Update: {}\n",
-            self.name,
-            self.description,
-            self.author,
-            self.package_author,
-            self.package_version,
-            self.license,
-            self.url,
-            self.categories,
-            self.source_type,
-            self.arch,
-            self.can_auto_update
-        )
-    }
 }
 
 pub trait Source {
